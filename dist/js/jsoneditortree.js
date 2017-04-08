@@ -24,11 +24,12 @@
 		}
 		, createObj:function(nodeDate){
 			$.each(nodeDate,function(i,elem){
-				console.log(i,elem)
+				//console.log(i,elem)
 				if(elem.type == "object"){
 					this.tree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
 					if(elem.properties != undefiend){
-						this.tree +=  this.createObj(elem.properties)
+						//this.tree +=  this.createObj(elem.properties)
+						this.tree += '<h1>node</h1>'
 					}
 				}
 			})
