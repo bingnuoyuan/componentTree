@@ -17,23 +17,24 @@
 		}
 		, createNode:function(schema){
 			this.tree += '<p data-type="'+schema.type+'">'+schema.title+'</p>'
-			if(schema.properties){ //obj
+			if(schema.properties != undefiend){ //obj
 				this.tree += this.createObj(schema.properties)
 			}
 			return this.tree 
 		}
 		, createObj:function(nodeDate){
+			var self =  this
 			$.each(nodeDate,function(i,elem){
 				//console.log(i,elem)
 				if(elem.type == "object"){
-					this.tree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
+					self.tree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
 					if(elem.properties != undefiend){
 						//this.tree +=  this.createObj(elem.properties)
-						this.tree += '<h1>node</h1>'
+						self.tree += '<h1>node</h1>'
 					}
 				}
 			})
-			return this.tree
+			return self.tree
 		}
 	};
 	$.fn.jsoneditortree = function(elem,options){
