@@ -49,7 +49,16 @@
 		}
 		, drawTree:function(type,name,pid,id,path,schemapath,index){
 			var options = '{"type":'+type+', "pid":'+pid+', "id":'+id+', "path":'+path+', "schemapath": '+schemapath+', "index":'+index+'}'
-			var $tree = '<p data-options="'+options+'">'+name+'</p>'
+			//var $tree = '<p data-options="'+options+'">'+name+'</p>'
+			var $tree = '<ul id="'+pid+'_ul">'+
+						'<li id="'+id+'" data-type="'+type+'" data-path="'+path+'" data-schemapath="'+schemapath+'" data-index="'+index+'">'+
+						'<span class="line"></span>'+
+						'<a class="treenode"></a>'
+						'</li>'+
+						'</ul>';
+				,phtml = $('#'+pid+'').append($tree)
+
+
 			return $tree
 		}
 	};
@@ -58,3 +67,8 @@
 		return o;
 	}
 })(jQuery,window)
+
+
+
+
+
