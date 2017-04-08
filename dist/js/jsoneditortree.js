@@ -2,9 +2,9 @@
 (function ($,undefiend) {
 	// body...
 	function jsonEditorTree(elem,options){
-		var options = $.extend({},options)
-			, this.elem = elem
-			, this.options = options
+		options = $.extend({},options)
+		, this.elem = elem
+		, this.options = options
 
 		this.init()
 	}
