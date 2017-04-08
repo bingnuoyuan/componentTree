@@ -16,7 +16,7 @@
 			this.elem.append(html)
 		}
 		, createNode:function(schema){
-			this.tree += '<p data-type="'+schema.type+'">'+schema.title+'</p>'
+			this.tree += '<p data-type="'+schema.type+'" class="root">'+schema.title+'</p>'
 			if(schema.properties != undefiend){ //obj
 				this.tree += this.createObj(schema.properties)
 			}
@@ -24,17 +24,18 @@
 		}
 		, createObj:function(nodeDate){
 			var self =  this
+				, htmltree = ''
 			$.each(nodeDate,function(i,elem){
 				//console.log(i,elem)
 				if(elem.type == "object"){
-					self.tree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
+					htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
 					if(elem.properties != undefiend){
-						//this.tree +=  this.createObj(elem.properties)
-						self.tree += '<h1>node</h1>'
+						htmltree +=  self.createObj(elem.properties)
+						//htmltree += '<h1>node</h1>'
 					}
 				}
 			})
-			return self.tree
+			return htmltree
 		}
 	};
 	$.fn.jsoneditortree = function(elem,options){
