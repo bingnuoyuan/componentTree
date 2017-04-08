@@ -27,13 +27,23 @@
 				, htmltree = ''
 			$.each(nodeDate,function(i,elem){
 				//console.log(i,elem)
-				if(elem.type == "object"){
+				if(elem.type == "object" || elem.type == "array"){
 					htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
 					if(elem.properties != undefiend){
 						htmltree +=  self.createObj(elem.properties)
 						//htmltree += '<h1>node</h1>'
 					}
+					if(elem.items != undefiend){
+						htmltree +=  self.createObj(elem)
+					}
 				}
+				/*else if(elem.type == "array"){
+					htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
+					if(elem.default != undefiend){
+						//htmltree +=  self.createObj(elem.properties)
+						htmltree += '<h1>array</h1>'
+					}
+				}*/
 			})
 			return htmltree
 		}
