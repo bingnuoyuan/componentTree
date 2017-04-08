@@ -16,7 +16,8 @@
 			this.elem.append(html)
 		}
 		, createNode:function(schema){
-			this.tree += '<p data-type="'+schema.type+'" class="root">'+schema.title+'</p>'
+			/*this.tree += '<p data-type="'+schema.type+'" class="root">'+schema.title+'</p>'*/
+			this.tree += this.drawTree(schema.type,schema.title,0,0,"root","root",0)
 			if(schema.properties != undefiend){ //obj
 				this.tree += this.createObj(schema.properties)
 			}
@@ -27,25 +28,29 @@
 				, htmltree = ''
 			$.each(nodeDate,function(i,elem){
 				//console.log(i,elem)
-				if(elem.type == "object" || elem.type == "array"){
-					htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
+				if(elem.type == "object"){
+					/*htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'*/
+					htmltree += self.drawTree(elem.type,elem.title,1,2,"root.root_1","root.root_1",1)
 					if(elem.properties != undefiend){
 						htmltree +=  self.createObj(elem.properties)
-						//htmltree += '<h1>node</h1>'
 					}
+				}else if(elem.type == "array"){
+					/*htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'*/
+					htmltree += self.drawTree(elem.type,elem.title,1,2,"root.root_1","root.root_1",1)
 					if(elem.items != undefiend){
 						htmltree +=  self.createObj(elem)
 					}
 				}
-				/*else if(elem.type == "array"){
-					htmltree += '<p data-type="'+elem.type+'">'+elem.title+'</p>'
-					if(elem.default != undefiend){
-						//htmltree +=  self.createObj(elem.properties)
-						htmltree += '<h1>array</h1>'
-					}
-				}*/
 			})
 			return htmltree
+		}
+		, _path:function(){
+			return 'root.path'
+		}
+		, drawTree:function(type,name,pid,id,path,schemapath,index){
+			var options = '{"type":'+type+', "pid":'+pid+', "id":'+id+', "path":'+path+', "schemapath": '+schemapath+', "index":'+index+'}'
+			var $tree = '<p data-options="'+options+'">'+name+'</p>'
+			return $tree
 		}
 	};
 	$.fn.jsoneditortree = function(elem,options){
